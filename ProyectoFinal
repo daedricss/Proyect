@@ -1,0 +1,86 @@
+
+import java.io.*;
+import java.sql.*;
+
+public class Conector {
+
+	private Connection conector;
+	private Statement ejecutador;
+	private ResultSet capturador;
+
+	public void objConexionBd() {
+		try {
+
+			Class.forName("com.mysql.jdbc.Driver");
+
+			conector = DriverManager.getConnection("jdbc:mysql://localhost/proyfinal?user=root&password=Ovlivion");
+			System.out.println("la conexion se establecio con exito");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			try {
+				conector = DriverManager.getConnection("jdbc:mysql://localhost/test?user=root&password=Ovlivion");
+
+				ejecutador = conector.createStatement();
+
+				ejecutador.execute("Create database Users1");
+				ejecutador.execute("Use Users1");
+				ejecutador.execute("Create table Alumnos(id int, User varchar(45),Pass varchar(45),Primary key(id))ENGINE = InnoDB;");
+				ejecutador.execute("Create table Profesores(id int, User varchar(45),Pass varchar(45),Primary key(id))ENGINE = InnoDB;");
+				ejecutador.execute("Create table Administracion(id int, User varchar(45),Pass varchar(45),Primary key(id))ENGINE = InnoDB;");
+				
+				ejecutador.execute("create database cecyte;");
+				ejecutador.executeQuery("use Cecyte;");
+				ejecutador.execute("create table alumns(id int auto_increment," + "name VARCHAR(45) NOT NULL,"
+						+ "last_name VARCHAR(45) NOT NULL,code VARCHAR(45) NOT NULL,"
+						+ "phone VARCHAR(45) NOT NULL,e-mail VARCHAR(45) NOT NULL,grupo varchar(45),"
+						+ " PRIMARY KEY (`id`))ENGINE = InnoDB;");
+				ejecutador.execute("CREATE TABLE profesors (id` INTEGER UNSIGNED NULL AUTO_INCREMENT,"
+						+ "name VARCHAR(45) NOT NULL," + "last_name VARCHAR(45) NOT NULL,code VARCHAR(45) NOT NULL,"
+						+ "phone VARCHAR(45) NOT NULL,e-mail VARCHAR(45) NOT NULL,"
+						+ " PRIMARY KEY (`id`))ENGINE = InnoDB;");
+				ejecutador.executeQuery("CREATE TABLE datos(id INTEGER UNSIGNED NULL AUTO_INCREMENT,"
+						+ "name VARCHAR(45) NOT NULL,last_name VARCHAR(45) NOT NULL,"
+						+ "code VARCHAR(45) NOT NULL,phone VARCHAR(45) NOT NULL,e-mail VARCHAR(45) NOT NULL,"
+						+ "Area VARCHAR(45) NOT NULL, PRIMARY KEY (id))ENGINE = InnoDB;");
+				ejecutador.executeQuery("CREATE TABLE Admins (id INTEGER UNSIGNED NULL AUTO_INCREMENT,"
+						+ "name VARCHAR(45) NOT NULL,last_name VARCHAR(45) NOT NULL,"
+						+ "code VARCHAR(45) NOT NULL,phone VARCHAR(45) NOT NULL,e-mail VARCHAR(45) NOT NULL,"
+						+ "Area VARCHAR(45) NOT NULL, PRIMARY KEY (id))ENGINE = InnoDB;");
+				ejecutador.executeQuery("CREATE TABLE pacial_1(id INTEGER UNSIGNED AUTO_INCREMENT,"
+						+ " name VARCHAR NOT NULL,Algebra INTEGER UNSIGNED NOT NULL,Logica INTEGER UNSIGNED NOT NULL"
+						+ ",Quimica_I INTEGER UNSIGNED NOT NULL,TICs INTEGER UNSIGNED NOT NULL,"
+						+ "Ingles_I INTEGER UNSIGNED NOT NULL,PRIMARY KEY (id))ENGINE = InnoDB;");
+				ejecutador.executeQuery("CREATE TABLE pacial_2(id INTEGER UNSIGNED AUTO_INCREMENT,"
+						+ " name VARCHAR NOT NULL,Algebra INTEGER UNSIGNED NOT NULL,Logica INTEGER UNSIGNED NOT NULL"
+						+ ",Quimica_I INTEGER UNSIGNED NOT NULL,TICs INTEGER UNSIGNED NOT NULL,"
+						+ "Ingles_I INTEGER UNSIGNED NOT NULL,PRIMARY KEY (id))ENGINE = InnoDB;");
+				ejecutador.executeQuery("CREATE TABLE pacial_3(id INTEGER UNSIGNED AUTO_INCREMENT,"
+						+ " name VARCHAR NOT NULL,Algebra INTEGER UNSIGNED NOT NULL,Logica INTEGER UNSIGNED NOT NULL"
+						+ ",Quimica_I INTEGER UNSIGNED NOT NULL,TICs INTEGER UNSIGNED NOT NULL,"
+						+ "Ingles_I INTEGER UNSIGNED NOT NULL,PRIMARY KEY (id))ENGINE = InnoDB;");
+				ejecutador.executeQuery("CREATE TABLE pacial_4(id INTEGER UNSIGNED AUTO_INCREMENT,"
+						+ " name VARCHAR NOT NULL,Algebra INTEGER UNSIGNED NOT NULL,Logica INTEGER UNSIGNED NOT NULL"
+						+ ",Quimica_I INTEGER UNSIGNED NOT NULL,TICs INTEGER UNSIGNED NOT NULL,"
+						+ "Ingles_I INTEGER UNSIGNED NOT NULL,PRIMARY KEY (id))ENGINE = InnoDB;");
+				ejecutador.executeQuery("CREATE TABLE final(id INTEGER UNSIGNED AUTO_INCREMENT,"
+						+ " name VARCHAR NOT NULL,Algebra INTEGER UNSIGNED NOT NULL,Logica INTEGER UNSIGNED NOT NULL"
+						+ ",Quimica_I INTEGER UNSIGNED NOT NULL,TICs INTEGER UNSIGNED NOT NULL,"
+						+ "Ingles_I INTEGER UNSIGNED NOT NULL,PRIMARY KEY (id))ENGINE = InnoDB;");
+				ejecutador.executeQuery("DELIMITER //"
+						+ "Create trigger Altas"
+						+ "AFTER INSERT ON alumns"
+						+ "for each row"
+						+ "BEGUIN"
+						+ "INSERT INTO datos VALUES(null,new.name,new.last_name,new.code,new.phone,new.e-mail);");
+				
+				
+				objConexionBd();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+
+	}
+}
