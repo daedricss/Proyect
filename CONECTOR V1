@@ -1,0 +1,137 @@
+
+import java.io.*;
+import java.sql.*;
+
+public class Conector {
+
+	private Connection conector;
+	private Statement ejecutador;
+	private ResultSet capturador;
+
+	public void objConexionBd() {
+		try {
+
+			Class.forName("com.mysql.jdbc.Driver");
+
+			conector = DriverManager.getConnection("jdbc:mysql://localhost/cecyte?user=root&password=Ovlivion");
+			System.out.println("la conexion se establecio con exito");
+			ejecutador = conector.createStatement();
+			try {
+				ejecutador.execute("select * from Personas;");
+			} catch (SQLException e) {
+				ejecutador.execute("create table Personas(id int auto_increment," + "nombre VARCHAR(45) NOT NULL,"
+						+ "apellido VARCHAR(45)NOT NULL,codigo VARCHAR(45)NOT NULL,"
+						+ "telefono VARCHAR(45) NOT NULL,correo VARCHAR(45) NOT NULL,"
+						+ "grado int,grupo VARCHAR(45), tipo_persona VARCHAR(45),"
+						+ " PRIMARY KEY (id))ENGINE = InnoDB;");
+				ejecutador.execute(
+						"Insert into Personas values(null, 'Demo', 'Demostration','1145','654-654456','demo@asdas.asd',3,'qwe','Alumno');");
+				ejecutador.executeUpdate("delete from Personas where codigo=1145;");
+			}
+			try {
+				ejecutador.execute("select * from parcial_1;");
+			} catch (SQLException e) {
+				ejecutador.execute("create table parcial_1(id INT AUTO_INCREMENT,"
+						+ " nombre VARCHAR(45) ,Algebra INTEGER NOT NULL,Logica INTEGER NOT NULL"
+						+ ",Quimica_I INTEGER NOT NULL,TICs INTEGER  NOT NULL,"
+						+ "Ingles_I INTEGER NOT NULL,PRIMARY KEY (id))ENGINE = InnoDB;");
+				ejecutador.execute("insert into parcial_1 values(null,'Demo',5,5,5,5,5);");
+				ejecutador.executeUpdate("delete from parcial_1 where nombre='Demo';");
+			}
+			try {
+				ejecutador.execute("select * from parcial_2;");
+			} catch (SQLException e) {
+				ejecutador.execute("create table parcial_2(id INT AUTO_INCREMENT,"
+						+ " nombre VARCHAR(45) ,Algebra INTEGER NOT NULL,Logica INTEGER NOT NULL"
+						+ ",Quimica_I INTEGER NOT NULL,TICs INTEGER  NOT NULL,"
+						+ "Ingles_I INTEGER NOT NULL,PRIMARY KEY (id))ENGINE = InnoDB;");
+				ejecutador.execute("insert into parcial_2 values(null,'Demo',5,5,5,5,5);");
+				ejecutador.executeUpdate("delete from parcial_2 where nombre='Demo';");
+			}
+			try {
+				ejecutador.execute("select * from parcial_3;");
+			} catch (SQLException e) {
+				ejecutador.execute("create table parcial_3(id INT AUTO_INCREMENT,"
+						+ " nombre VARCHAR(45) ,Algebra INTEGER NOT NULL,Logica INTEGER NOT NULL"
+						+ ",Quimica_I INTEGER NOT NULL,TICs INTEGER  NOT NULL,"
+						+ "Ingles_I INTEGER NOT NULL,PRIMARY KEY (id))ENGINE = InnoDB;");
+				ejecutador.execute("insert into parcial_3 values(null,'Demo',5,5,5,5,5);");
+				ejecutador.executeUpdate("delete from parcial_3 where nombre='Demo';");
+			}
+			try {
+				ejecutador.execute("select * from parcial_4;");
+			} catch (SQLException e) {
+				ejecutador.execute("create table parcial_4(id INT AUTO_INCREMENT,"
+						+ " nombre VARCHAR(45) ,Algebra INTEGER NOT NULL,Logica INTEGER NOT NULL"
+						+ ",Quimica_I INTEGER NOT NULL,TICs INTEGER  NOT NULL,"
+						+ "Ingles_I INTEGER NOT NULL,PRIMARY KEY (id))ENGINE = InnoDB;");
+				ejecutador.execute("insert into parcial_4 values(null,'Demo',5,5,5,5,5);");
+				ejecutador.executeUpdate("delete from parcial_4 where nombre='Demo';");
+			}
+			try {
+
+				ejecutador.execute("select * from final;");
+			} catch (SQLException e) {
+				ejecutador.execute("create table final(id INT AUTO_INCREMENT,"
+						+ " nombre VARCHAR(45) ,Algebra INTEGER NOT NULL,Logica INTEGER NOT NULL"
+						+ ",Quimica_I INTEGER NOT NULL,TICs INTEGER  NOT NULL,"
+						+ "Ingles_I INTEGER NOT NULL,PRIMARY KEY (id))ENGINE = InnoDB;");
+				ejecutador.execute("insert into final values(null,'Demo',5,5,5,5,5);");
+				ejecutador.executeUpdate("delete from final where nombre='Demo';");
+			}
+
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			try {
+				conector = DriverManager.getConnection("jdbc:mysql://localhost/test?user=root&password=Ovlivion");
+
+				ejecutador = conector.createStatement();
+
+				ejecutador.execute("create database cecyte;");
+				ejecutador.execute("use Cecyte;");
+				ejecutador.execute("create table Personas(id int auto_increment," + "nombre VARCHAR(45) NOT NULL,"
+						+ "apellido VARCHAR(45)NOT NULL,codigo VARCHAR(45)NOT NULL,"
+						+ "telefono VARCHAR(45) NOT NULL,correo VARCHAR(45) NOT NULL,"
+						+ "grado int,grupo VARCHAR(45), tipo_persona VARCHAR(45),"
+						+ " PRIMARY KEY (id))ENGINE = InnoDB;");
+				ejecutador.execute("Insert into Personas values(null, 'Demo', 'Demostration','1145','654-654456','demo@asdas.asd',3,'qwe','Alumno');");
+				ejecutador.executeUpdate("delete from Personas where nombre='Demo';");
+				ejecutador.execute("create table parcial_1(id INT AUTO_INCREMENT,"
+						+ " nombre VARCHAR(45) ,Algebra INTEGER NOT NULL,Logica INTEGER NOT NULL"
+						+ ",Quimica_I INTEGER NOT NULL,TICs INTEGER  NOT NULL,"
+						+ "Ingles_I INTEGER NOT NULL,PRIMARY KEY (id))ENGINE = InnoDB;");
+				ejecutador.execute("insert into parcial_1 values(null,'Demo',5,5,5,5,5);");
+				ejecutador.executeUpdate("delete from parcial_1 where nombre='Demo';");
+				ejecutador.execute("CREATE TABLE parcial_2(id INTEGER  AUTO_INCREMENT,"
+						+ " nombre VARCHAR(45) NOT NULL,Algebra INTEGER  NOT NULL,Logica INTEGER  NOT NULL"
+						+ ",Quimica_I INTEGER  NOT NULL,TICs INTEGER  NOT NULL,"
+						+ "Ingles_I INTEGER  NOT NULL,PRIMARY KEY (id))ENGINE = InnoDB;");
+				ejecutador.execute("insert into parcial_2 values(null, 'Demo',5,5,5,5,5);");
+				ejecutador.executeUpdate("delete from parcial_2 where nombre='Demo';");
+				ejecutador.execute("CREATE TABLE parcial_3(id INTEGER  AUTO_INCREMENT,"
+						+ " nombre VARCHAR(45) NOT NULL,Algebra INTEGER  NOT NULL,Logica INTEGER  NOT NULL"
+						+ ",Quimica_I INTEGER  NOT NULL,TICs INTEGER  NOT NULL,"
+						+ "Ingles_I INTEGER  NOT NULL,PRIMARY KEY (id))ENGINE = InnoDB;");
+				ejecutador.execute("insert into parcial_3 values(null, 'Demo',5,5,5,5,5);");
+				ejecutador.executeUpdate("delete from parcial_3 where nombre='Demo';");
+				ejecutador.execute("CREATE TABLE parcial_4(id INTEGER  AUTO_INCREMENT,"
+						+ " nombre VARCHAR(45) NOT NULL,Algebra INTEGER  NOT NULL,Logica INTEGER  NOT NULL"
+						+ ",Quimica_I INTEGER  NOT NULL,TICs INTEGER  NOT NULL,"
+						+ "Ingles_I INTEGER  NOT NULL,PRIMARY KEY (id))ENGINE = InnoDB;");
+				ejecutador.execute("insert into parcial_4 values(null, 'Demo',5,5,5,5,5);");
+				ejecutador.executeUpdate("delete from parcial_4 where nombre='Demo';");
+				ejecutador.execute("CREATE TABLE final(id INTEGER  AUTO_INCREMENT,"
+						+ " nombre VARCHAR(45) NOT NULL,Algebra INTEGER  NOT NULL,Logica INTEGER  NOT NULL"
+						+ ",Quimica_I INTEGER  NOT NULL,TICs INTEGER  NOT NULL,"
+						+ "Ingles_I INTEGER  NOT NULL,PRIMARY KEY (id))ENGINE = InnoDB;");
+				ejecutador.execute("insert into final values(null, 'Demo',5,5,5,5,5);");
+				ejecutador.executeUpdate("delete from final where nombre='Demo';");
+				objConexionBd();
+			} catch (SQLException e1) {
+				
+			}
+		}
+
+	}
+}
